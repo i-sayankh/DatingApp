@@ -27,6 +27,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{username}")]
+        [AllowAnonymous]
         public async Task<ActionResult<MemberDTO>> GetUser(string username) 
         {
             return await _userRepository.GetMembersAsync(username);
