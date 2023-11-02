@@ -19,7 +19,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
+        // [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers() 
         {
             var users = Ok(await _userRepository.GetMembersAsync());
@@ -27,7 +27,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{username}")]
-        [AllowAnonymous]
+        // [AllowAnonymous]
         public async Task<ActionResult<MemberDTO>> GetUser(string username) 
         {
             return await _userRepository.GetMembersAsync(username);
