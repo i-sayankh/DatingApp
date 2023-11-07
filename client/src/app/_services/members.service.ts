@@ -25,7 +25,7 @@ export class MembersService {
     const user = JSON.parse(userString);
     return {
       headers: new HttpHeaders({
-        Authorization: 'Bearer' + user.token
+        Authorization: 'Bearer ' + user.token
       })
     }
   }
