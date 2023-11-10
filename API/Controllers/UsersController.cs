@@ -22,7 +22,7 @@ namespace API.Controllers
         // [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers() 
         {
-            var users = Ok(await _userRepository.GetMembersAsync());
+            var users = await _userRepository.GetMembersAsync();
             return Ok(users); 
         }
 
