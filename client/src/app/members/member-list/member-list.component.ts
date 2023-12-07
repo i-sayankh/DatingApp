@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Member } from 'src/app/_models/member';
 import { MembersService } from 'src/app/_services/members.service';
@@ -13,7 +12,7 @@ export class MemberListComponent implements OnInit{
   // members$: Observable<Member[]> | undefined;
   members: Member[] = [];
   pagination: Pagination | undefined;
-  pageNumber = 1;
+  pageNumber = 2;
   pageSize = 5;
 
   constructor(private memberService: MembersService) {}
@@ -30,7 +29,17 @@ export class MemberListComponent implements OnInit{
           this.members = response.result;
           this.pagination = response.pagination;
         }
+      },
+      error: error => {
+        console.error('Error fetching members:', error);
       }
     })
+  }
+
+  pageChanged(event: any) {
+    if(this.pageNumber !== event.page) {
+      this.pageNumber = event.page;
+      this.loadMembers();
+    }    
   }
 }

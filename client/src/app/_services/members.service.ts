@@ -29,7 +29,7 @@ export class MembersService {
         }
         const pagination = response.headers.get('Pagination');
         if(pagination) {
-          this.paginatedResult.result = JSON.parse(pagination);
+          this.paginatedResult.pagination = JSON.parse(pagination);
         }
         return this.paginatedResult;
       })
