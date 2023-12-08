@@ -5,7 +5,7 @@ import { Pagination } from 'src/app/_models/pagination';
 import { UserParams } from 'src/app/_models/userParams';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
-import { take } from 'rxjs';
+import { take, delay } from 'rxjs';
 
 @Component({
   selector: 'app-member-list',
@@ -18,6 +18,7 @@ export class MemberListComponent implements OnInit{
   pagination: Pagination | undefined;
   userParams: UserParams | undefined;
   user: User | undefined;
+  genderList = [{value: 'male', display: 'Males'}, {value: 'female', display: 'Females'}]
 
   constructor(private memberService: MembersService, private accountService: AccountService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe({
@@ -48,6 +49,13 @@ export class MemberListComponent implements OnInit{
         console.error('Error fetching members:', error);
       }
     })
+  }
+
+  resetFilters() {
+    if(this.user) {
+      this.userParams = new UserParams(this.user);
+      this.loadMembers();
+    }
   }
 
   pageChanged(event: any) {
