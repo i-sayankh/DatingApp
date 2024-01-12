@@ -44,7 +44,7 @@ namespace API.Controllers
             var result = await _userManager.AddToRolesAsync(user, selectedRoles.Except(userRoles));
             if(!result.Succeeded) return BadRequest("Failed to Add Roles!!!");
 
-            result = await _userManager.RemoveFromRolesAsync(user, selectedRoles.Except(userRoles));
+            result = await _userManager.RemoveFromRolesAsync(user, userRoles.Except(selectedRoles));
             if(!result.Succeeded) return BadRequest("Failed to Remove from Roles!!!");
 
             return Ok(await _userManager.GetRolesAsync(user));
